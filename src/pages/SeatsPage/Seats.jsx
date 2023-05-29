@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
 
-export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSelected}) {
+
+export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSelected, seatsNumSelected, setSeatsNumSelected}) {
 
   
     const [seatState, setSeatState] = useState(isAvailable);
@@ -22,15 +22,21 @@ export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSel
 
     
 
-    function clickSeat (idSel, seatStateSel) {
+    function clickSeat (numSel, idSel, seatStateSel) {
         if (seatStateSel === false) alert("Esse assento não está disponível");
         else if (seatState === true) {
           setSeatState('selected');
           seatsSelected.includes(idSel);
           const newArray = [...seatsSelected];
           newArray.push(idSel);
-          console.log("Adicionado ao Selected: "+idSel);
           setSeatsSelected(newArray);
+
+          seatsNumSelected.includes(numSel);
+          const newArray2 = [...seatsNumSelected];
+          newArray2.push(numSel);
+          console.log("Adicionado ao setSeatsNumSelected: "+numSel);
+          setSeatsNumSelected(newArray2);
+
         }
         else if (seatState === 'selected') {
             setSeatState(true);
@@ -41,12 +47,20 @@ export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSel
              }
             setSeatsSelected(array);
             console.log("Removido do Selected: "+idSel);
+
+            const array2 = [...seatsNumSelected];
+            const index2 = array2.indexOf(numSel);
+            if (index2 > -1) { // only splice array when item is found
+                array.splice(index2, 1); // 2nd parameter means remove one item only
+             }
+            setSeatsNumSelected(array2);
+
         }
         console.log(seatsSelected);
     }
 
     return (
-        <SeatItem c1={color1(seatState)} c2={color2(seatState)} onClick={() => clickSeat(id, seatState)} >{name}</SeatItem>
+        <SeatItem c1={color1(seatState)} c2={color2(seatState)} onClick={() => clickSeat(name, id, seatState)} >{name}</SeatItem>
     );
 }
 

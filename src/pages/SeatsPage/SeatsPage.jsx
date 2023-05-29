@@ -14,6 +14,8 @@ export default function SeatsPage() {
     const [json, setJson] = useState([]);
     const [seatsSelected, setSeatsSelected] = useState([]);
 
+    const [seatsNumSelected, setSeatsNumSelected] = useState([]);
+
     const [name, setName] = useState("");
 	const [cpf, setCPF] = useState("");
 	const navigate = useNavigate();
@@ -39,7 +41,7 @@ export default function SeatsPage() {
 
         event.preventDefault();
 
-        console.log(seatsSelected);
+        console.log("seatsSelected: "+seatsSelected);
 
         console.log("Entrou no Send Request");
 
@@ -50,11 +52,23 @@ export default function SeatsPage() {
         };
         console.log("Data:"+data);
 
+
+        const smovie = json.movie.title;
+        const sdate = json.day.date;
+        const shour = json.name;
+        const sids = seatsNumSelected;
+        const sname = name;
+        const scpf = cpf;
+       
+
+
         const query = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', data);
 
-        query.then(() => navigate("/sucesso")) 
+
+        query.then(() => navigate("/sucesso", { state: {smovie, sdate, shour, sids, sname, scpf} })); 
       }
 
+  
     
       if (json.length === 0) {
         return (<div> Carregando assentos..... </div>);
@@ -66,7 +80,7 @@ export default function SeatsPage() {
 
             <SeatsContainer>
             {json.seats.map(item => (
-               <Seats id={item.id} name={item.name} isAvailable={item.isAvailable} seatsSelected={seatsSelected} setSeatsSelected={setSeatsSelected} />
+               <Seats id={item.id} name={item.name} isAvailable={item.isAvailable} seatsSelected={seatsSelected} setSeatsSelected={setSeatsSelected} seatsNumSelected={seatsNumSelected} setSeatsNumSelected={setSeatsNumSelected} />
 
             ))}
          
