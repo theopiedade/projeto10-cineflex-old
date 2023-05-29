@@ -60,7 +60,7 @@ export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSel
     }
 
     return (
-        <SeatItem c1={color1(seatState)} c2={color2(seatState)} onClick={() => clickSeat(name, id, seatState)} >{name}</SeatItem>
+        <SeatItem c1={color1(seatState)} c2={color2(seatState)} onClick={() => clickSeat(name, id, seatState)} > <div data-test="seat">{name}</div></SeatItem>
     );
 }
 

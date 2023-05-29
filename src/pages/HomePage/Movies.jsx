@@ -8,7 +8,7 @@ export default function Movies ({id, src, title, overview, releasedata}) {
     return (
         <Link to={`/sessoes/${id}`}>
             <MovieContainer>
-            <img src={src} alt={overview}/>
+            <img data-test="movie" src={src} alt={overview}/>
             </MovieContainer>
         </Link>
     );

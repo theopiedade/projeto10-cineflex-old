@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 export default function Sessions ({id, weekday, date, showtimes}) {
     return (
         <SessionContainer>
-            {weekday} - {date}
+            <h1 data-test="movie-day">{weekday} - {date}</h1>
             <ButtonsContainer>
                 {
                 showtimes.map(item => (
                     <Link to={`/assentos/${item.id}`}>
-                    <button>{item.name}</button>
+                    <button data-test="showtime">{item.name}</button>
                     </Link>
                 ))
 
@@ -31,6 +31,11 @@ const SessionContainer = styled.div`
     font-size: 20px;
     color: #293845;
     padding: 0 20px;
+    h1 {
+        font-family: 'Roboto';
+        font-size: 20px;
+        color: #293845;
+    }
 `
 const ButtonsContainer = styled.div`
     display: flex;

@@ -104,17 +104,17 @@ export default function SeatsPage() {
             <FormContainer>
                 <form onSubmit={sendRequest}>
                 Nome do Comprador:
-                <input value={name} onChange={e => setName(e.target.value)} placeholder="Digite seu nome..." />
+                <input data-test="client-name" value={name} onChange={e => setName(e.target.value)} placeholder="Digite seu nome..." />
 
                 CPF do Comprador:
-                <input value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
+                <input data-test="client-cpf" value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
 
-                <button>Reservar Assento(s)</button>
+                <button data-test="book-seat-btn">Reservar Assento(s)</button>
                 </form>
             </FormContainer>
 
             <FooterContainer>
-                <div>
+                <div data-test="footer">
                     <img src={json.movie.posterURL} alt="poster" />
                 </div>
                 <div>

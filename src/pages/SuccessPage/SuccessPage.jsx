@@ -6,35 +6,46 @@ export default function SuccessPage() {
     const { smovie, sdate, shour, sids, sname, scpf} = useLocation().state;
 
     console.log(smovie);
+    const navigate = useNavigate();
 
     const params = useParams();
     console.log(params.name);
+
+    function goHome() {
+        navigate("/");
+    }
 
     return (
         <PageContainer>
             <h1>Pedido feito <br /> com sucesso!</h1>
 
             <TextContainer>
+                <div data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{smovie}</p>
                 <p>{sdate} - {shour}</p>
+                </div>
             </TextContainer>
 
             <TextContainer>
+                <div data-test="seats-info">
                 <strong><p>Ingressos</p></strong>
                 {sids.map(item => (
                <p>Assento {item}</p>
                  ))}
-
+                </div>
             </TextContainer>
 
             <TextContainer>
+                <div data-test="client-info">
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {sname}</p>
                 <p>CPF: {scpf}</p>
+                </div>
             </TextContainer>
-
-            <button>Voltar para Home</button>
+            <form onSubmit={goHome}>
+                <button onclick={goHome} data-test="go-home-btn">Voltar para Home</button>
+            </form>    
         </PageContainer>
     )
 }
