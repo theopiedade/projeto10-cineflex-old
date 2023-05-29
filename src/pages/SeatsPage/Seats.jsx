@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function Seats({id, name, isAvailable, seatsSelected, setSeatsSelected}) {
 

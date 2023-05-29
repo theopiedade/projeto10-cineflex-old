@@ -1,20 +1,9 @@
 import styled from "styled-components"
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Seats from "./Seats";
 
-const colors1 = [
-    "#C3CFD9",
-    "#FBE192",
-    "#1AAE9E"
-]
-
-const colors2 = [
-    "#808F9D",
-    "#F7C52B",
-    "#0E7D71"
-]
 
 
 export default function SeatsPage() {
@@ -23,8 +12,11 @@ export default function SeatsPage() {
     console.log(params);
 
     const [json, setJson] = useState([]);
-    const [seatState, setSeatState] = useState([]);
     const [seatsSelected, setSeatsSelected] = useState([]);
+
+    const [name, setName] = useState("");
+	const [cpf, setCPF] = useState("");
+	const navigate = useNavigate();
 
     useEffect(() => {
         const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params.idSession}/seats`;
@@ -42,6 +34,27 @@ export default function SeatsPage() {
         }); // se der erro
     
       }, []);
+      
+      function sendRequest(event) {
+
+        event.preventDefault();
+
+        console.log(seatsSelected);
+
+        console.log("Entrou no Send Request");
+
+        const data = {
+        	ids: seatsSelected,
+            name: name,
+            cpf: cpf
+        };
+        console.log("Data:"+data);
+
+        const query = axios.post('https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many', data);
+
+        query.then(() => navigate("/sucesso")) 
+      }
+
     
       if (json.length === 0) {
         return (<div> Carregando assentos..... </div>);
@@ -75,13 +88,15 @@ export default function SeatsPage() {
             </CaptionContainer>
 
             <FormContainer>
+                <form onSubmit={sendRequest}>
                 Nome do Comprador:
-                <input placeholder="Digite seu nome..." />
+                <input value={name} onChange={e => setName(e.target.value)} placeholder="Digite seu nome..." />
 
                 CPF do Comprador:
-                <input placeholder="Digite seu CPF..." />
+                <input value={cpf} onChange={e => setCPF(e.target.value)} placeholder="Digite seu CPF..." />
 
                 <button>Reservar Assento(s)</button>
+                </form>
             </FormContainer>
 
             <FooterContainer>
