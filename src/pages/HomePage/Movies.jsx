@@ -6,7 +6,7 @@ import SessionsPage from "../SessionsPage/SessionsPage";
 export default function Movies ({id, src, title, overview, releasedata}) {
 
     return (
-        <Link to={`/sessoes/${id}`} element={<SessionsPage/>}>
+        <Link to={`/sessoes/${id}`}>
             <MovieContainer>
             <img src={src} alt={overview}/>
             </MovieContainer>
