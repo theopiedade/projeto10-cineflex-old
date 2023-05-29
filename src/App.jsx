@@ -27,8 +27,8 @@ export default function App() {
         <Routes>
 
           <Route path='/' element={  <HomePage /> } />
-          <Route path='/sessoes/37' element={<SessionsPage />} />
-          <Route path='/assentos/240' element={<SeatsPage />} />
+          <Route path='/sessoes/:idSession' element={<SessionsPage />} />
+          <Route path='/assentos/:idSession' element={<SeatsPage />} />
           <Route path='/sucesso' element={<SuccessPage />} />
 
         </Routes>

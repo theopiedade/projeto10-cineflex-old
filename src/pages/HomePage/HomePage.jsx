@@ -1,11 +1,9 @@
 import styled from "styled-components"
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import Movies from "./Movies";
 
 export default function HomePage() {
-
 
     const [movies, setMovies] = useState([]);
 
@@ -16,7 +14,7 @@ export default function HomePage() {
       const promise = axios.get(URL);
   
       promise.then((answer) => {
-        console.log(answer.data);
+        //console.log(answer.data);
         setMovies(answer.data);
       }); // se der certo e os dados chegarem
   
@@ -36,13 +34,8 @@ export default function HomePage() {
 
         <ListContainer>
             {movies.map(movie=> (
-              <Link to='/sessoes/37'>
-                <Movies key={movie.id} src={movie.posterURL} title={movie.title} overview={movie.overview} releasedata={movie.releasedata} />
-              </Link>
-            )
-            )}
-  
-  
+               <Movies id={movie.id} src={movie.posterURL} title={movie.title} overview={movie.overview} releasedata={movie.releasedata} />
+            ))}
         </ListContainer>
 
         </PageContainer>

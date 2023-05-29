@@ -1,13 +1,16 @@
 import styled from "styled-components"
-import HomePage from "./HomePage";
+import { Link } from "react-router-dom";
+import SessionsPage from "../SessionsPage/SessionsPage";
 
 
-export default function Movies ({key, src, title, overview, releasedata}) {
-    console.log(src);
+export default function Movies ({id, src, title, overview, releasedata}) {
+
     return (
-        <MovieContainer>
-        <img src={src} alt={overview}/>
-        </MovieContainer>
+        <Link to={`/sessoes/${id}`} element={<SessionsPage/>}>
+            <MovieContainer>
+            <img src={src} alt={overview}/>
+            </MovieContainer>
+        </Link>
     );
 }
 
